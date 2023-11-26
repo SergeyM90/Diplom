@@ -14,7 +14,7 @@
 
 Развертывание инфраструктуры автоматизировано с помощью Terraform, Ansible и Gitlab.
 Все этапы выполняются в одном пайплайне.
-Self-hosted Gitlab работает на локальном домашнем сервере. Раннер запускается в докер-контейнере. Несколько подробнее задокументировал [здесь](https://github.com/SergeyM90/Diplom/blob/main/Details.md)
+Self-hosted Gitlab работает на локальном домашнем сервере. Раннер запускается в докер-контейнере. Несколько подробнее задокументировал [здесь] https://github.com/SergeyM90/Diplom/blob/main/Details.md)
 Для запуска Терраформа используется оффициальный образ от гитлаба gitlab-org/terraform-images/stable:latest
 Для запуска Ansible образ собирается в начале пайплайна на основе alpine:3.18 (https://github.com/SergeyM90/Diplom/blob/main/Dockerfile.txt) и загружается в Container registry гитлаба
 
