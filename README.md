@@ -37,4 +37,14 @@ Self-hosted Gitlab работает на локальном домашнем с�
 Для реализации проекта из имеющихся у Яндекса вариантов выбрал дистрибутив AlmaLinux 8, т.к. с убунтой и дебианом работал c начала учебы, и решил, что пора изучать дистрибутивы RHEL, для CentOS больше нет поддержки, а из опенсорс вариантов активно развивается AlmaLinux.
 ![image](https://github.com/SergeyM90/Diplom/assets/84016375/a97970b7-8753-47d5-a1ec-2356d133b26c)
 
+# Структура проекта
 
+Пайплайн: [.gitlab-ci.yml](https://github.com/SergeyM90/Diplom/blob/main/gitlab-ci.yml)
+Инфраструктура в Терраформе: ./terraform/
+Провижн необходимых сервисов с помощью Ансибл:
+Postgres cluster: ./ansible/postgres/ (адаптирован плейбук https://github.com/vitabaks/postgresql_cluster)
+./ansible/postgres/inventory
+./ansible/postgres/deploy_pgcluster.yml
+ELK, Zabbix, nginx: ./ansible/project/
+./ansible/project/inventory
+./ansible/project/deploy_project.yml
