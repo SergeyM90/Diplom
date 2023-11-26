@@ -1,4 +1,4 @@
-# Gitlab. Practice. 1
+# Gitlab
 
 ## Tasks
 - Setup selfhosted gitlab  in cloud with container registry
