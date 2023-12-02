@@ -42,7 +42,7 @@ Self-hosted Gitlab работает на локальном домашнем с�
 Пайплайн: [.gitlab-ci.yml](https://github.com/SergeyM90/Diplom/blob/main/gitlab-ci.yml)
 Инфраструктура в Терраформе: [./terraform/](https://github.com/SergeyM90/Diplom/tree/main/Terraform)
 Провижн необходимых сервисов с помощью Ансибл:
-Postgres cluster: [./ansible/postgres/inventory.txt](https://github.com/SergeyM90/Diplom/blob/main/ansible/postgres/inventory.txt) (адаптирован плейбук https://github.com/vitabaks/postgresql_cluster)
+Postgres cluster: (https://github.com/SergeyM90/Diplom/tree/main/ansible/postgres) (адаптирован плейбук https://github.com/vitabaks/postgresql_cluster)
 ./ansible/postgres/inventory
 ./ansible/postgres/deploy_pgcluster.yml
 ELK, Zabbix, nginx: ./ansible/project/
