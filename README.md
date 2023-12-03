@@ -231,21 +231,14 @@ output {
 Доступные индексы:  
 ![image](https://github.com/SergeyM90/Diplom/assets/84016375/d58daeb2-937d-41ad-8373-870ae5edacc6)  
 
+Хосты (установлен модуль system метрикбита):  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/72d6075c-d38a-4878-81e3-3a681a6e684e)  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/972b0d84-5520-4bb2-9c7c-d6fa065067bc)  
 
+Nginx логи, стастика доступа к страницам:  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/80457c58-6a7d-48c2-80b7-2147cc41f068)  
 
+# Бэкапы
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Также настроены ежедневные снапшоты дисков со сроком жизни не более недели:  
+https://github.com/SergeyM90/Diplom/blob/main/Terraform/snapshot.tf
