@@ -45,6 +45,6 @@ Self-hosted Gitlab работает на локальном домашнем с�
 Postgres cluster: (https://github.com/SergeyM90/Diplom/tree/main/ansible/postgres) (адаптирован плейбук https://github.com/vitabaks/postgresql_cluster)
 [./ansible/postgres/inventory](https://github.com/SergeyM90/Diplom/blob/main/ansible/postgres/inventory.txt)
 [./ansible/postgres/deploy_pgcluster.yml](https://github.com/SergeyM90/Diplom/blob/main/ansible/postgres/deploy_pgcluster.yml)
-ELK, Zabbix, nginx: ./ansible/project/
-./ansible/project/inventory
-./ansible/project/deploy_project.yml
+ELK, Zabbix, nginx: [./ansible/project/](https://github.com/SergeyM90/Diplom/tree/main/ansible/project)
+[./ansible/project/inventory](https://github.com/SergeyM90/Diplom/blob/main/ansible/project/inventory)
+[./ansible/project/deploy_project.yml](https://github.com/SergeyM90/Diplom/blob/main/ansible/project/deploy_project.yml)
