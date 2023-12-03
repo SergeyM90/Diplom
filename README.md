@@ -154,6 +154,90 @@ https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/zabbix_agent
 
 # ELK
 
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/elasticsearch  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/kibana  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/metricbeat  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/logstash  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/filebeat  
+
+В настоящее время ресурсы elasticsearch недоступны из России с официального репозитория, зеркало яндекса отключено, также недоступен docker registry эластика, в котором хранятся образы логсташа, метрикбита и файлбита.  
+В связи с этим необходимые пакеты скачаны через VPN, создан локальный yum репозиторий, в хранилище образов добавлен образ готового диска с ОС и nginx. Для репозитория решил использовать Bastion host (для оптимизации ресурсов). Он сразу создается из заранее подготовленного образа с включенным nginx'ом.  
+С помощью плейбука производится  
+Установка Elasticsearch  
+Генерация enrollment-token для Kibana и её подключение к эластику  
+Установка Metricbeat на все хосты (на всех хостах включается модуль System, на хосте с эластиком - модуль для Elasticsearch и Kibana).  
+Установка Logstash на хост c Elasticsearch  
+Установка Filebeat на nginx хосты  
+Т.к. у меня тестовый проект, Logstash отправляет логи в кластер под пользователем elastic, но для использования в продакшене необходимо создать отдельного пользователя с необходимыми ролями, то же касается Metricbeat. Так же из доработок на которые сейчас решил не тратить время - включение API Logstash и его мониторинг.  
+Filebeat поставляет логи в логсташ, где настроен один пайплайн, который разбирает логи на разные индексы по document_type, устанавливаемому файлбитом.   
+Конвейер Logstash:  
+input {  
+  beats {  
+      port => "5044"  
+      host => "192.168.101.31"  
+  }  
+}  
+  
+filter {  
+  if [fields][document_type] == "nginx-access" {  
+    grok {  
+      match => {  
+        "message" => "%{IPORHOST:ip} - %{DATA:user_name} \[%{HTTPDATE:time}\] \"%{WORD:http_method} %{DATA:url} HTTP/%{NUMBER:http_version}\" %  
+ {NUMBER:response_code} %{NUMBER:body_sent_bytes} \"%{DATA:request_referer}\" \"%{DATA:user_agent}\""  
+      }  
+    }  
+  }  
+  else if [fields][document_type] == "nginx-error" {  
+    grok {  
+      match => {  
+        "message" => "%{TIMESTAMP_ISO8601:timestamp} \[%{LOGLEVEL:loglevel}\] \[%{DATA:error_type}\] %{GREEDYDATA:error_message}"  
+      }  
+    }  
+  }  
+}  
+  
+output {  
+  if [fields][document_type] == "nginx-access"  {  
+    elasticsearch {  
+      index => "nginx-access-%{+YYYY.MM.dd}"  
+      hosts => ["https://192.168.101.31:9200"]  
+      user => "elastic"  
+      password => "IzjkJbO68HHDFc_c2Jf9"   
+      cacert => "/etc/elkcert/http_ca.crt"   
+    }  
+  }  
+  else if [fields][document_type] == "nginx-error"  {  
+    elasticsearch {  
+      index => "nginx-error-%{+YYYY.MM.dd}"  
+      hosts => ["https://192.168.101.31:9200"]  
+      user => "elastic"  
+      password => "IzjkJbO68HHDFc_c2Jf9"   
+      cacert => "/etc/elkcert/http_ca.crt"   
+    }  
+  }  
+}  
+
+состояние кластера curl -k -X GET -u elastic:password 'https://localhost:9200/_cluster/health?pretty'  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/edbd1271-0f7c-4cb7-85ce-8e85a067f402)
+
+Состояние индексов curl -k -X GET -u elastic:password  'https://localhost:9200/_cat/indices'  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/56124c06-4849-46fa-929e-3dcbc127790f)  
+
+(Yellow, потому что в кластере эластика только одна мастер-нода)  
+
+Мониторинг самого себя с помощью метрикбит:  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/aec9fc1c-2e37-4e05-b978-64a3f8164604)  
+
+Доступные индексы:  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/d58daeb2-937d-41ad-8373-870ae5edacc6)  
+
+
+
+
+
+
+
+
 
 
 
