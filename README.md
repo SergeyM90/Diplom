@@ -135,6 +135,28 @@ RestAPI Patroni на порту 8008 используется для опред�
 
 # Zabbix мониторинг  
 
+Роли:  
+
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/zabbix_server  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/zabbix_front  
+https://github.com/SergeyM90/Diplom/tree/main/ansible/project/roles/zabbix_agent  
+
+Подключен мониторинг хостов заббиксом  
+Дополнительно на nginx хостах включен модуль stub_status для мониторинга соединений  
+На заббикс сервере после включения авторегистрации агентов сразу начинают поступать данные с хостов:  
+
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/87744ebe-ef06-49f3-9873-5c955d1221c5)
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/8aca9222-c73a-4121-8149-00f84aa90e5b)
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/140cccd4-b8d0-4bbf-8b92-1b69b61df0d7)
+
+Мониторинг CPU, Memory, Network, NGINX.  
+![image](https://github.com/SergeyM90/Diplom/assets/84016375/7d7af62e-b8c5-4b1a-98f3-fc5688db919b)
+
+# ELK
+
+
+
+
 
 
 
